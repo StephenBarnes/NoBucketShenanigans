@@ -1,0 +1,29 @@
+modLoader="javafml"
+loaderVersion="[36,)"
+license="Public domain"
+
+[[mods]]
+modId="nobucketshenanigans"
+version="v1.0"
+displayName="No Bucket Shenanigans"
+#updateJSONURL=""
+displayURL="https://www.curseforge.com/minecraft/mc-mods/nobucketshenanigans"
+#logoFile="logo.png"
+#credits=""
+authors="StephenBarnes"
+description='''
+Prevent placing water from buckets while falling. Make falling dangerous again.'''
+
+[[dependencies.nobucketshenanigans]]
+    modId="forge"
+    mandatory=true
+    versionRange="[36.2.0,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.nobucketshenanigans]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.5,1.17)"
+    ordering="NONE"
+    side="BOTH"
