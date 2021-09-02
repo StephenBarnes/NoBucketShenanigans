@@ -12,10 +12,10 @@ import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 public class OptionsHolder {
 	public static class Common {
 		
-		public final ConfigValue<List<? extends String>> itemsBlockRightClick;
+		public final ConfigValue<List<? extends String>> itemsCancelRightClick;
 
 		public Common(ForgeConfigSpec.Builder builder) {			
-	        itemsBlockRightClick = builder.comment("List of all the items you want to block right-clicking with while falling. "
+	        itemsCancelRightClick = builder.comment("List of all the items you want to block right-clicking with while falling. "
 	        		+ "To block bucket saving in vanilla, you only need water and lava buckets (not e.g. milk buckets because "
 	        		+ "they can't be placed). If you have a mod adding milk, honey, slime, etc. then add their items here. "
 	        		+ "This includes e.g. teapots, cups, bowls that can place fluids. You can also put non-fluid-placing items "
