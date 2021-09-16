@@ -23,7 +23,8 @@ public class OptionsHolder {
 	        		.define("itemsBlockRightClick", Lists.newArrayList(
 	        				"minecraft:water_bucket",
 	        				"minecraft:lava_bucket",
-	        				"minecraft:hay_block"));
+	        				"minecraft:hay_block",
+	        				"minecraft:cobwebs"));
 		}
 	}
 
