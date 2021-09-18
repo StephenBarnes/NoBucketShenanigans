@@ -2,8 +2,17 @@ package com.stebars.nobucketshenanigans;
 
 import java.util.List;
 
+import org.jline.utils.Log;
+
 import com.stebars.nobucketshenanigans.OptionsHolder;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.item.BoatEntity;
+import net.minecraft.entity.item.minecart.MinecartEntity;
+import net.minecraft.entity.passive.PigEntity;
+import net.minecraft.entity.passive.StriderEntity;
+import net.minecraft.entity.passive.horse.HorseEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.util.ActionResultType;
@@ -30,30 +39,41 @@ public class NoBucketShenanigans
     
     @SubscribeEvent
     public void onRightClickBlock(RightClickBlock event) {
-    	cancelRightClickIfFalling(event);
+    	cancelRightClickIfItemAndFalling(event);
     }
 
     @SubscribeEvent
     public void onRightClickEntitySpecific(EntityInteractSpecific event) {
-    	cancelRightClickIfFalling(event);
+    	cancelRightClickIfItemAndFalling(event);
     }
     
     @SubscribeEvent
     public void onRightClickEntity(EntityInteract event) {
-    	cancelRightClickIfFalling(event);
+    	Entity target = event.getTarget();
+    	if ((OptionsHolder.COMMON.preventGettingInBoat.get() && (target instanceof BoatEntity))
+    			|| (OptionsHolder.COMMON.preventGettingInMinecart.get() && (target instanceof MinecartEntity))
+    			|| (OptionsHolder.COMMON.preventGettingOnAnimal.get() && ((target instanceof PigEntity)
+    					|| (target instanceof StriderEntity)
+    					|| (target instanceof HorseEntity))))
+    		cancelRightClickIfFalling(event);
+    	else
+    		cancelRightClickIfItemAndFalling(event);
     }
     
     @SubscribeEvent
     public void onRightClickItem(RightClickItem event) {
-    	cancelRightClickIfFalling(event);
+    	cancelRightClickIfItemAndFalling(event);
+    }
+    
+    private void cancelRightClickIfItemAndFalling(PlayerInteractEvent event) { 	
+    	Item item = event.getItemStack().getItem();
+    	List<? extends String> itemsToBlock = OptionsHolder.COMMON.itemsCancelRightClick.get();
+    	if (itemsToBlock.contains(item.getRegistryName().getNamespace())
+    			|| itemsToBlock.contains(item.getRegistryName().toString()))
+    		cancelRightClickIfFalling(event);
     }
     
     private void cancelRightClickIfFalling(PlayerInteractEvent event) {
-    	Item item = event.getItemStack().getItem();
-    	List<? extends String> itemsToBlock = OptionsHolder.COMMON.itemsCancelRightClick.get();
-    	if (!itemsToBlock.contains(item.getRegistryName().getNamespace())
-    			&& !itemsToBlock.contains(item.getRegistryName().toString()))
-    		return;
 		PlayerEntity player = event.getPlayer();
 		if (player.isInLava() || player.isInWater() || player.onClimbable())
 			return;

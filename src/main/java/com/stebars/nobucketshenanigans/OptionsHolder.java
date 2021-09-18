@@ -13,7 +13,10 @@ public class OptionsHolder {
 	public static class Common {
 		
 		public final ConfigValue<List<? extends String>> itemsCancelRightClick;
-
+		public final ConfigValue<Boolean> preventGettingInBoat;
+		public final ConfigValue<Boolean> preventGettingInMinecart;
+		public final ConfigValue<Boolean> preventGettingOnAnimal;
+		
 		public Common(ForgeConfigSpec.Builder builder) {			
 	        itemsCancelRightClick = builder.comment("List of all the items you want to block right-clicking with while falling. "
 	        		+ "To block bucket saving in vanilla, you only need water and lava buckets (not e.g. milk buckets because "
@@ -25,6 +28,16 @@ public class OptionsHolder {
 	        				"minecraft:lava_bucket",
 	        				"minecraft:hay_block",
 	        				"minecraft:cobwebs"));
+	        preventGettingInBoat = builder.comment("Prevent players from getting in boats while they're falling. NOTE that "
+	        		+ "boats will still cancel fall damage, so I recommend installing Random Tweaks "
+	        		+ "(https://www.curseforge.com/minecraft/mc-mods/randompatches-forge) to re-enable boat fall damage.")
+	        		.define("preventGettingInBoat", true);
+	        preventGettingInMinecart = builder.comment("Prevent players from getting in minecarts while falling. "
+	        		+ "Minecarts cancel all fall damage if they land on rails, otherwise they pass it to the rider.")
+	        		.define("preventGettingInMinecart", true);
+	        preventGettingOnAnimal = builder.comment("Prevent players from getting on horses, striders, and pigs while "
+	        		+ "falling. These animals don't cancel fall damage.")
+	        		.define("preventGettingOnAnimal", true);
 		}
 	}
 
