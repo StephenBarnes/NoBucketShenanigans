@@ -4,7 +4,7 @@ license="Public domain"
 
 [[mods]]
 modId="nobucketshenanigans"
-version="v1.2"
+version="1.16.5-1.4"
 displayName="No Bucket Shenanigans"
 #updateJSONURL=""
 displayURL="https://www.curseforge.com/minecraft/mc-mods/no-bucket-shenanigans"
@@ -12,7 +12,7 @@ displayURL="https://www.curseforge.com/minecraft/mc-mods/no-bucket-shenanigans"
 #credits=""
 authors="StephenBarnes"
 description='''
-Prevent placing water from buckets while falling. Make falling dangerous again.'''
+Prevent placing water from buckets etc. while falling. Make falling dangerous again.'''
 
 [[dependencies.nobucketshenanigans]]
     modId="forge"
